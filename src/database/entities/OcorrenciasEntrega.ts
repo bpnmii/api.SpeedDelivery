@@ -13,9 +13,9 @@ import { Ocorrencias } from './Ocorrencias'
 export class OcorrenciasEntrega {
   @OneToMany(() => Entregas, (entrega) => entrega.codigo_operacao)
   @JoinColumn({ name: 'codigo_entrega' })
-  codigo_entrega!: string
+  codigo_entrega!: number
 
   @OneToMany(() => Ocorrencias, (ocorrencias) => ocorrencias.codigo_ocorrencia)
   @JoinColumn({ name: 'codigo_ocorrencia' })
-  descricao_ocorrencia!: string
+  descricao_ocorrencia!: number
 }

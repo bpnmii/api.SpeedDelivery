@@ -12,7 +12,7 @@ export class Ocorrencias {
       },
     },
   })
-  codigo_ocorrencia!: string
+  codigo_ocorrencia!: number
 
   @Column({
     type: 'varchar',

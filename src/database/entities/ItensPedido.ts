@@ -11,7 +11,7 @@ export class ItensPedido {
     //   },
     // },
   })
-  codigo_entrega!: string
+  codigo_entrega!: number
 
   @PrimaryColumn({
     type: 'bigint',
@@ -22,7 +22,7 @@ export class ItensPedido {
       },
     },
   })
-  codigo!: string
+  codigo!: number
 
   @Column({ type: 'string', length: 40 })
   descricao_produto!: string
@@ -39,5 +39,5 @@ export class ItensPedido {
       },
     },
   })
-  quantidade!: string
+  quantidade!: number
 }

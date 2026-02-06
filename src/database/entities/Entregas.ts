@@ -32,7 +32,7 @@ export class Entregas {
       },
     },
   })
-  codigo_operacao!: string
+  codigo_operacao!: number
 
   @Column({
     type: 'bigint',
@@ -43,7 +43,7 @@ export class Entregas {
     //   },
     // },
   })
-  codigo_cliente!: string
+  codigo_cliente!: number
 
   @Column({ type: 'string', length: 40 })
   nome_cliente!: string

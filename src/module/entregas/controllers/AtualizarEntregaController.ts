@@ -11,16 +11,16 @@ export class AtualizarEntregaController {
 
   async handle(req: Request, res: Response) {
     const paramsSchema = z.object({
-      codigo_operacao: z.string(),
+      codigo_operacao: z.coerce.number(),
     })
 
     const bodySchema = z.object({
       sequencia_entrega: z.number().optional(),
-      codigo_cliente: z.string().optional(),
+      codigo_cliente: z.number().optional(),
       nome_cliente: z.string().optional(),
       endereco: z.string().optional(),
       bairro: z.string().optional(),
-      ccodigo_operacaoade: z.string().optional(),
+      cidade: z.string().optional(),
       estado: z.string().optional(),
       status_entrega: z.nativeEnum(StatusEntregaEnum).optional(),
       status_resultado: z.nativeEnum(StatusResultadoEnum).optional(),

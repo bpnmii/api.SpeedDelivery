@@ -12,8 +12,8 @@ export class CriarEntregaController {
   async handle(req: Request, res: Response) {
     const bodySchema = z.object({
       sequencia_entrega: z.number(),
-      codigo_operacao: z.string(),
-      codigo_cliente: z.string(),
+      codigo_operacao: z.number(),
+      codigo_cliente: z.number(),
       nome_cliente: z.string(),
       endereco: z.string(),
       bairro: z.string(),

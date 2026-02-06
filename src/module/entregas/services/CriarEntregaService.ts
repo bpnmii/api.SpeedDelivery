@@ -3,8 +3,8 @@ import AppError from '../../../errors/app-error'
 
 interface IRequest {
   sequencia_entrega: number
-  codigo_operacao: string
-  codigo_cliente: string
+  codigo_operacao: number
+  codigo_cliente: number
   nome_cliente: string
   endereco: string
   bairro: string

@@ -6,7 +6,7 @@ export class DeletarEntregaService {
 
   async execute(codigo_operacao: number) {
     const entrega = await this.entregasRepositories.findOneBy({
-      codigo_operacao: codigo_operacao as any,
+      codigo_operacao,
     })
 
     if (!entrega) {

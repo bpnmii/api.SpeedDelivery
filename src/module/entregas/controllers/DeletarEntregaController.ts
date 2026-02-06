@@ -7,7 +7,7 @@ export class DeletarEntregaController {
 
   async handle(req: Request, res: Response) {
     const SchemaParams = z.object({
-      codigo_operacao: z.string().transform(Number),
+      codigo_operacao: z.number(),
     })
 
     const { codigo_operacao } = SchemaParams.parse(req.params)
