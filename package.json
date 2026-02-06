@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "typeorm": "typeorm-ts-node-commonjs",
-    "start:dev": "tsx watch src/server.ts",
+    "dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
     "build": "tsup src --out-dir build",
     "test": "jest --maxWorkers=50%",
@@ -35,6 +35,7 @@
     "mysql": "2.18.1",
     "pg": "8.10.0",
     "reflect-metadata": "0.1.13",
+    "ts-node": "10.9.2",
     "typeorm": "0.3.12",
     "typeorm-naming-strategies": "4.1.0",
     "zod": "3.21.4"
