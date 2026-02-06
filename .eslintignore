@@ -1,0 +1,7 @@
+node_modules
+build
+/*.js
+node_modules
+dist
+*.spec.ts
+*.d.ts
