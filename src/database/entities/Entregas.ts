@@ -19,12 +19,12 @@ export class Entregas {
     type: 'int',
     generated: 'increment',
   })
-  @Index() // Necessário para colunas incrementais que não são PK
+  @Index()
   sequencia_entrega!: number
 
   @PrimaryColumn({
     type: 'bigint',
-    generated: 'increment', // Aqui o 'generated' é aceito legalmente
+    generated: 'increment',
     transformer: {
       to: (value: string | number): number => Number(value),
       from: (value: string | number | null): string => {

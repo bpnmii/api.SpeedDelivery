@@ -4,7 +4,7 @@ import { Entity, PrimaryColumn, Column, Index } from 'typeorm'
 export class Ocorrencias {
   @PrimaryColumn({
     type: 'bigint',
-    generated: 'increment', // Aqui o 'generated' é aceito legalmente
+    generated: 'increment',
     transformer: {
       to: (value: string | number): number => Number(value),
       from: (value: string | number | null): string => {
