@@ -1,45 +1,60 @@
-import { RoleEnum } from '@/database/entities/User'
-import { UsersRepositories } from '../../../database/repositories/UsersRepositories'
+import { EntregasRepositories } from '../../../database/repositories/EntregasRepositories'
 import AppError from '../../../errors/app-error'
 
 interface IRequest {
-  cpf: string
-  address: string
-  name: string
-  email: string
-  tel: string
-  role?: RoleEnum
+  sequencia_entrega: number
+  codigo_operacao: string
+  codigo_cliente: string
+  nome_cliente: string
+  endereco: string
+  bairro: string
+  cidade: string
+  estado: string
 }
 
 export class CriarEntregaService {
-  constructor(private usersRepository: UsersRepositories) {}
+  constructor(private entregasRepository: EntregasRepositories) {}
 
-  async execute({ cpf, address, name, email, tel, role }: IRequest) {
-    const usuarioExiste = await this.usersRepository.findOneBy({ email })
-
-    if (usuarioExiste) {
-      throw new AppError('E-mail already exists!', 400)
-    }
-
-    const users = this.usersRepository.create({
-      cpf,
-      address,
-      name,
-      email,
-      tel,
-      role,
+  async execute({
+    sequencia_entrega,
+    codigo_operacao,
+    codigo_cliente,
+    nome_cliente,
+    endereco,
+    bairro,
+    cidade,
+    estado,
+  }: IRequest) {
+    const usuarioExiste = await this.entregasRepository.findOneBy({
+      codigo_operacao,
     })
 
-    await this.usersRepository.save(users)
+    if (usuarioExiste) {
+      throw new AppError('Operação já existe!', 400)
+    }
+
+    const entregas = this.entregasRepository.create({
+      sequencia_entrega,
+      codigo_operacao,
+      codigo_cliente,
+      nome_cliente,
+      endereco,
+      bairro,
+      cidade,
+      estado,
+    })
+
+    await this.entregasRepository.save(entregas)
 
     return {
-      id: users.id,
-      cpf: users.cpf,
-      address: users.address,
-      name: users.name,
-      email: users.email,
-      tel: users.tel,
-      role: users.role,
+      sequencia_entrega: entregas.sequencia_entrega,
+      codigo_operacao: entregas.codigo_operacao,
+      codigo_cliente: entregas.codigo_cliente,
+      nome_cliente: entregas.nome_cliente,
+      endereco: entregas.endereco,
+      bairro: entregas.bairro,
+      cidade: entregas.cidade,
+      estado: entregas.estado,
     }
   }
 }

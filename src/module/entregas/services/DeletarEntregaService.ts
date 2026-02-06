@@ -1,13 +1,20 @@
-import { UsersRepositories } from '../../../database/repositories/UsersRepositories'
+import { EntregasRepositories } from '../../../database/repositories/EntregasRepositories'
 import AppError from '../../../errors/app-error'
 
 export class DeletarEntregaService {
-  constructor(private usersRepositories: UsersRepositories) {}
+  constructor(private entregasRepositories: EntregasRepositories) {}
 
-  async execute(id: number) {
-    const user = await this.usersRepositories.findOneBy({ id })
-    if (!user) throw new AppError('Client dont found!', 404)
-    await this.usersRepositories.delete(id)
-    return { message: 'Client removed sucessfully!' }
+  async execute(codigo_operacao: number) {
+    const entrega = await this.entregasRepositories.findOneBy({
+      codigo_operacao: codigo_operacao as any,
+    })
+
+    if (!entrega) {
+      throw new AppError('Entrega não encontrada!', 404)
+    }
+
+    await this.entregasRepositories.delete(codigo_operacao)
+
+    return { message: 'Entrega removida com sucesso!' }
   }
 }

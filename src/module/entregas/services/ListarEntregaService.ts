@@ -1,8 +1,8 @@
-import { UsersRepositories } from '../../../database/repositories/UsersRepositories'
+import { EntregasRepositories } from '../../../database/repositories/EntregasRepositories'
 
 export class ListarEntregaService {
-  constructor(private usersRepositories: UsersRepositories) {}
+  constructor(private entregasRepositories: EntregasRepositories) {}
   async execute() {
-    return this.usersRepositories.find()
+    return this.entregasRepositories.find()
   }
 }

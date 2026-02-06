@@ -1,26 +1,34 @@
+import {
+  StatusEntregaEnum,
+  StatusResultadoEnum,
+} from '@/database/entities/Entregas'
 import { EntregasRepositories } from '../../../database/repositories/EntregasRepositories'
 
 interface IRequest {
-  sequencia_entrega: number
+  sequencia_entrega?: number
   codigo_operacao: string
-  codigo_cliente: string
-  nome_cliente: string
-  endereco: string
-  bairro: string
-  cidade: string
-  estado: string
+  codigo_cliente?: string
+  nome_cliente?: string
+  endereco?: string
+  bairro?: string
+  cidade?: string
+  estado?: string
+  status_entrega?: StatusEntregaEnum
+  status_resultado?: StatusResultadoEnum
 }
 
 export class AtualizarEntregaService {
   constructor(private EntregassRepositories: EntregasRepositories) {}
 
   async execute(data: IRequest) {
-    const { id, ...updateData } = data
+    const { codigo_operacao, ...updateData } = data
 
-    const EntregasExists = await this.EntregassRepositories.findOneBy({ id })
+    const EntregasExists = await this.EntregassRepositories.findOneBy({
+      codigo_operacao,
+    })
     if (!EntregasExists) throw new Error('Entregas not found!')
 
-    await this.EntregassRepositories.update(id, updateData)
+    await this.EntregassRepositories.update(codigo_operacao, updateData)
 
     return { ...EntregasExists, ...updateData }
   }

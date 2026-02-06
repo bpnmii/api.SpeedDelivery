@@ -62,4 +62,20 @@ export class Entregas {
 
   @Column({ type: 'string', length: 9 })
   CEP!: string
+
+  @Column({
+    type: 'enum',
+    enum: StatusEntregaEnum,
+    default: StatusEntregaEnum.NAO_INICIADO,
+    nullable: true,
+  })
+  status_entrega?: StatusEntregaEnum
+
+  @Column({
+    type: 'enum',
+    enum: StatusResultadoEnum,
+    default: StatusResultadoEnum.NAO_ENTREGUE,
+    nullable: true,
+  })
+  status_resultado?: StatusResultadoEnum
 }
