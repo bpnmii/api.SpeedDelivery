@@ -4,7 +4,7 @@ import { CriarOcorrenciasEntregaService } from '../services/CriarOcorrenciasEntr
 
 export class CriarOcorrenciasEntregaController {
   constructor(
-    private CriarOcorrenciasEntregaService: CriarOcorrenciasEntregaService,
+    private criarOcorrenciasEntregaService: CriarOcorrenciasEntregaService,
   ) {}
 
   async handle(req: Request, res: Response) {
@@ -13,13 +13,10 @@ export class CriarOcorrenciasEntregaController {
       codigo_entrega: z.number(),
     })
 
-    const { codigo_ocorrencia, codigo_entrega } = bodySchema.parse(req.body)
+    const data = bodySchema.parse(req.body)
 
-    const entrega = await this.CriarOcorrenciasEntregaService.execute({
-      codigo_ocorrencia,
-      codigo_entrega,
-    })
+    const resultado = await this.criarOcorrenciasEntregaService.execute(data)
 
-    return res.status(201).json(entrega)
+    return res.status(201).json(resultado)
   }
 }

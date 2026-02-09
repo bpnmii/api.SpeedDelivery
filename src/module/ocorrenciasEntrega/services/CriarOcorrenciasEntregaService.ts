@@ -10,12 +10,16 @@ export class CriarOcorrenciasEntregaService {
   constructor(private OcorrenciaRepository: OcorrenciasEntregaRepositories) {}
 
   async execute({ codigo_ocorrencia, codigo_entrega }: IRequest) {
-    const usuarioExiste = await this.OcorrenciaRepository.findOneBy({
+    const vinculoExiste = await this.OcorrenciaRepository.findOneBy({
       codigo_ocorrencia,
+      codigo_entrega,
     })
 
-    if (usuarioExiste) {
-      throw new AppError('Operação já existe!', 400)
+    if (vinculoExiste) {
+      throw new AppError(
+        'Esta ocorrência já foi registrada para esta entrega!',
+        400,
+      )
     }
 
     const ocorrenciaE = this.OcorrenciaRepository.create({
@@ -25,9 +29,6 @@ export class CriarOcorrenciasEntregaService {
 
     await this.OcorrenciaRepository.save(ocorrenciaE)
 
-    return {
-      codigo_ocorrencia: ocorrenciaE.codigo_ocorrencia,
-      codigo_entrega: ocorrenciaE.codigo_entrega,
-    }
+    return ocorrenciaE
   }
 }
