@@ -7,7 +7,7 @@ export class DeletarItensPedidoController {
 
   async handle(req: Request, res: Response) {
     const SchemaParams = z.object({
-      codigo: z.number(),
+      codigo: z.coerce.number(),
     })
 
     const { codigo } = SchemaParams.parse(req.params)

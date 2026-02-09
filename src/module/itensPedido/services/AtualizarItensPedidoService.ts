@@ -1,4 +1,5 @@
 import { ItensPedidoRepositories } from '../../../database/repositories/ItensPedidoRepositories'
+import AppError from '../../../errors/app-error'
 
 interface IRequest {
   codigo: number
@@ -17,9 +18,14 @@ export class AtualizarItensPedidoService {
     const ItensPedido = await this.ItensPedidoRepositories.findOneBy({
       codigo,
     })
-    if (!ItensPedido) throw new Error('Entregas not found!')
 
-    await this.ItensPedidoRepositories.update(codigo, updateData)
+    // Ajustado para AppError e mensagem correta
+    if (!ItensPedido) {
+      throw new AppError('Item do pedido não encontrado!', 404)
+    }
+
+    // Usando objeto de critério { codigo } para garantir a atualização correta
+    await this.ItensPedidoRepositories.update({ codigo }, updateData)
 
     return { ...ItensPedido, ...updateData }
   }

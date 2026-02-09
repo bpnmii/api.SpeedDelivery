@@ -8,7 +8,7 @@ const router = Router()
 
 router.post('/', CriarItensPedidoFactory)
 router.get('/', ListarItensPedidoFactory)
-router.delete('/:id', DeletarItensPedidoFactory)
-router.put('/:id', AtualizarItensPedidoFactory)
+router.delete('/:codigo', DeletarItensPedidoFactory)
+router.put('/:codigo', AtualizarItensPedidoFactory)
 
 export default router

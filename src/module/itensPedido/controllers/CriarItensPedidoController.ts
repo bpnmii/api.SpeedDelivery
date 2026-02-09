@@ -7,24 +7,16 @@ export class CriarItensPedidoController {
 
   async handle(req: Request, res: Response) {
     const bodySchema = z.object({
-      codigo: z.number(),
       codigo_entrega: z.number(),
       descricao_produto: z.string(),
       embalagem: z.string(),
       quantidade: z.number(),
     })
 
-    const { codigo, codigo_entrega, descricao_produto, embalagem, quantidade } =
-      bodySchema.parse(req.body)
+    const data = bodySchema.parse(req.body)
 
-    const entrega = await this.criarItensPedidoService.execute({
-      codigo,
-      codigo_entrega,
-      descricao_produto,
-      embalagem,
-      quantidade,
-    })
+    const itensPedido = await this.criarItensPedidoService.execute(data)
 
-    return res.status(201).json(entrega)
+    return res.status(201).json(itensPedido)
   }
 }

@@ -27,7 +27,7 @@ export class AtualizarEntregaService {
     const EntregasExists = await this.EntregassRepositories.findOneBy({
       codigo_operacao,
     })
-    if (!EntregasExists) throw new Error('Entregas not found!')
+    if (!EntregasExists) throw new Error('Entrega não encontrada!')
 
     await this.EntregassRepositories.update(codigo_operacao, updateData)
 

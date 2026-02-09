@@ -10,11 +10,11 @@ export class DeletarItensPedidoService {
     })
 
     if (!itensPedido) {
-      throw new AppError('ItensPedido não encontrada!', 404)
+      throw new AppError('Item não encontrada!', 404)
     }
 
     await this.ItensPedidoRepositories.delete(codigo)
 
-    return { message: 'ItensPedido removida com sucesso!' }
+    return { message: 'Item removida com sucesso!' }
   }
 }

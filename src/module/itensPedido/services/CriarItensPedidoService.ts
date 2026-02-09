@@ -2,7 +2,7 @@ import { ItensPedidoRepositories } from '../../../database/repositories/ItensPed
 import AppError from '../../../errors/app-error'
 
 interface IRequest {
-  codigo: number
+  codigo?: number
   codigo_entrega: number
   descricao_produto: string
   embalagem: string
@@ -12,37 +12,20 @@ interface IRequest {
 export class CriarItensPedidoService {
   constructor(private itensPedidoRepository: ItensPedidoRepositories) {}
 
-  async execute({
-    codigo,
-    codigo_entrega,
-    descricao_produto,
-    embalagem,
-    quantidade,
-  }: IRequest) {
-    const usuarioExiste = await this.itensPedidoRepository.findOneBy({
-      codigo,
-    })
+  async execute(data: IRequest) {
+    if (data.codigo) {
+      const entregaExiste = await this.itensPedidoRepository.findOneBy({
+        codigo: data.codigo,
+      })
 
-    if (usuarioExiste) {
-      throw new AppError('Operação já existe!', 400)
+      if (entregaExiste) {
+        throw new AppError('Operação já existe!', 400)
+      }
     }
-
-    const itensPedido = this.itensPedidoRepository.create({
-      codigo,
-      codigo_entrega,
-      descricao_produto,
-      embalagem,
-      quantidade,
-    })
+    const itensPedido = this.itensPedidoRepository.create(data)
 
     await this.itensPedidoRepository.save(itensPedido)
 
-    return {
-      codigo: itensPedido.codigo,
-      codigo_entrega: itensPedido.codigo_entrega,
-      descricao_produto: itensPedido.descricao_produto,
-      embalagem: itensPedido.embalagem,
-      quantidade: itensPedido.quantidade,
-    }
+    return itensPedido
   }
 }
