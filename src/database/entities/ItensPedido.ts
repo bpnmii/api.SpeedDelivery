@@ -1,10 +1,16 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  JoinColumn,
+} from 'typeorm'
+import { Entregas } from './Entregas'
 
 @Entity('ItensPedido')
 export class ItensPedido {
-  @Column({
-    type: 'bigint',
-  })
+  @OneToMany(() => Entregas, (entrega) => entrega.codigo_operacao)
+  @JoinColumn({ name: 'codigo_entrega' })
   codigo_entrega!: number
 
   @PrimaryGeneratedColumn({
