@@ -25,23 +25,11 @@ export class Entregas {
   @PrimaryColumn({
     type: 'bigint',
     generated: 'increment',
-    transformer: {
-      to: (value: string | number): number => Number(value),
-      from: (value: string | number | null): string => {
-        return value ? value.toString().padStart(5, '0') : ''
-      },
-    },
   })
   codigo_operacao!: number
 
   @Column({
     type: 'bigint',
-    // transformer: {
-    //   to: (value: string | number): number => Number(value),
-    //   from: (value: string | number | null): string => {
-    //     return value ? value.toString().padStart(5, '0') : ''
-    //   },
-    // },
   })
   codigo_cliente!: number
 

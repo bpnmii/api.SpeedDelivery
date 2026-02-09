@@ -4,23 +4,11 @@ import { Entity, Column, PrimaryColumn } from 'typeorm'
 export class ItensPedido {
   @Column({
     type: 'bigint',
-    // transformer: {
-    //   to: (value: string | number): number => Number(value),
-    //   from: (value: string | number | null): string => {
-    //     return value ? value.toString().padStart(5, '0') : ''
-    //   },
-    // },
   })
   codigo_entrega!: number
 
   @PrimaryColumn({
     type: 'bigint',
-    transformer: {
-      to: (value: string | number): number => Number(value),
-      from: (value: string | number | null): string => {
-        return value ? value.toString().padStart(5, '0') : ''
-      },
-    },
   })
   codigo!: number
 
@@ -32,12 +20,6 @@ export class ItensPedido {
 
   @Column({
     type: 'bigint',
-    transformer: {
-      to: (value: string | number): number => Number(value),
-      from: (value: string | number | null): string => {
-        return value ? value.toString().padStart(5, '0') : ''
-      },
-    },
   })
   quantidade!: number
 }
