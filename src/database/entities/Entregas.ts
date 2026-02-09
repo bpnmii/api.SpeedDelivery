@@ -15,13 +15,13 @@ export enum StatusResultadoEnum {
 
 @Entity('Entregas')
 export class Entregas {
-  @Column({ type: 'int' })
-  sequencia_entrega!: number
-
   @PrimaryGeneratedColumn({
     type: 'bigint',
   })
   codigo_operacao!: number
+
+  @Column({ type: 'int' })
+  sequencia_entrega!: number
 
   @Column({
     type: 'bigint',

@@ -9,6 +9,7 @@ interface IRequest {
   codigo_operacao: number
   codigo_cliente?: number
   nome_cliente?: string
+  CEP?: string
   endereco?: string
   bairro?: string
   cidade?: string

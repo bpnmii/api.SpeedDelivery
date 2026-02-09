@@ -18,6 +18,7 @@ export class AtualizarEntregaController {
       sequencia_entrega: z.number().optional(),
       codigo_cliente: z.number().optional(),
       nome_cliente: z.string().optional(),
+      CEP: z.string().optional(),
       endereco: z.string().optional(),
       bairro: z.string().optional(),
       cidade: z.string().optional(),
