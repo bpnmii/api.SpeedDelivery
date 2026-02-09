@@ -17,5 +17,5 @@ export class OcorrenciasEntrega {
 
   @OneToMany(() => Ocorrencias, (ocorrencias) => ocorrencias.codigo_ocorrencia)
   @JoinColumn({ name: 'codigo_ocorrencia' })
-  descricao_ocorrencia!: number
+  codigo_ocorrencia!: number
 }
