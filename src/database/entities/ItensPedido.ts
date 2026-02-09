@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity('ItensPedido')
 export class ItensPedido {
@@ -7,15 +7,15 @@ export class ItensPedido {
   })
   codigo_entrega!: number
 
-  @PrimaryColumn({
+  @PrimaryGeneratedColumn({
     type: 'bigint',
   })
   codigo!: number
 
-  @Column({ type: 'string', length: 40 })
+  @Column({ type: 'varchar', length: 40 })
   descricao_produto!: string
 
-  @Column({ type: 'string', length: 40 })
+  @Column({ type: 'varchar', length: 40 })
   embalagem!: string
 
   @Column({

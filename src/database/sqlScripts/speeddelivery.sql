@@ -2,9 +2,9 @@
 -- DATABASE: SpeedDelivery
 -- ============================================================================
 
-DROP DATABASE IF EXISTS Speeddelivery;
-CREATE DATABASE Speeddelivery;
-USE Speeddelivery;
+DROP DATABASE IF EXISTS SpeedDelivery;
+CREATE DATABASE SpeedDelivery;
+USE SpeedDelivery;
 
 -- ============================================================================
 -- TABELA: Entregas

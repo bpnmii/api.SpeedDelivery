@@ -11,6 +11,11 @@ import { Ocorrencias } from './Ocorrencias'
 
 @Entity('OcorrenciasEntrega')
 export class OcorrenciasEntrega {
+  @PrimaryGeneratedColumn({
+    type: 'bigint',
+  })
+  index!: number
+
   @OneToMany(() => Entregas, (entrega) => entrega.codigo_operacao)
   @JoinColumn({ name: 'codigo_entrega' })
   codigo_entrega!: number

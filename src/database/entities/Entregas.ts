@@ -1,4 +1,4 @@
-import { Entity, Column, Index, PrimaryColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
 
 export enum StatusEntregaEnum {
   NAO_INICIADO = 'NAO_INICIADO',
@@ -15,16 +15,11 @@ export enum StatusResultadoEnum {
 
 @Entity('Entregas')
 export class Entregas {
-  @Column({
-    type: 'int',
-    generated: 'increment',
-  })
-  @Index()
+  @Column({ type: 'int' })
   sequencia_entrega!: number
 
-  @PrimaryColumn({
+  @PrimaryGeneratedColumn({
     type: 'bigint',
-    generated: 'increment',
   })
   codigo_operacao!: number
 
@@ -33,22 +28,22 @@ export class Entregas {
   })
   codigo_cliente!: number
 
-  @Column({ type: 'string', length: 40 })
+  @Column({ type: 'varchar', length: 40 })
   nome_cliente!: string
 
-  @Column({ type: 'string', length: 40 })
+  @Column({ type: 'varchar', length: 40 })
   endereco!: string
 
-  @Column({ type: 'string', length: 40 })
+  @Column({ type: 'varchar', length: 40 })
   bairro!: string
 
-  @Column({ type: 'string', length: 40 })
+  @Column({ type: 'varchar', length: 40 })
   cidade!: string
 
-  @Column({ type: 'string', length: 40 })
+  @Column({ type: 'varchar', length: 40 })
   estado!: string
 
-  @Column({ type: 'string', length: 9 })
+  @Column({ type: 'varchar', length: 9 })
   CEP!: string
 
   @Column({
