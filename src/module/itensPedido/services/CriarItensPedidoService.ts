@@ -9,7 +9,7 @@ interface IRequest {
   quantidade: number
 }
 
-export class CriarItensPedidoervice {
+export class CriarItensPedidoService {
   constructor(private itensPedidoRepository: ItensPedidoRepositories) {}
 
   async execute({

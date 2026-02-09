@@ -2,10 +2,10 @@ import { ItensPedidoRepositories } from '../../../database/repositories/ItensPed
 
 interface IRequest {
   codigo: number
-  codigo_entrega: number
-  descricao_produto: string
-  embalagem: string
-  quantidade: number
+  codigo_entrega?: number
+  descricao_produto?: string
+  embalagem?: string
+  quantidade?: number
 }
 
 export class AtualizarItensPedidoService {
