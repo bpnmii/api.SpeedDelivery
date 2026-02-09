@@ -21,6 +21,7 @@ export class AtualizarOcorrenciaController {
       codigo_ocorrencia,
       ...data,
     })
+
     return res.json(resultado)
   }
 }

@@ -9,25 +9,19 @@ interface IRequest {
 export class CriarOcorrenciaService {
   constructor(private OcorrenciaRepository: OcorrenciasRepositories) {}
 
-  async execute({ codigo_ocorrencia, descricao_ocorrencia }: IRequest) {
-    const usuarioExiste = await this.OcorrenciaRepository.findOneBy({
-      codigo_ocorrencia,
+  async execute(data: IRequest) {
+    const ocorrenciaExiste = await this.OcorrenciaRepository.findOneBy({
+      codigo_ocorrencia: data.codigo_ocorrencia,
     })
 
-    if (usuarioExiste) {
-      throw new AppError('Operação já existe!', 400)
+    if (ocorrenciaExiste) {
+      throw new AppError('Ocorrência já existe!', 400)
     }
 
-    const ocorrencia = this.OcorrenciaRepository.create({
-      codigo_ocorrencia,
-      descricao_ocorrencia,
-    })
+    const ocorrencia = this.OcorrenciaRepository.create(data)
 
     await this.OcorrenciaRepository.save(ocorrencia)
 
-    return {
-      codigo_ocorrencia: ocorrencia.codigo_ocorrencia,
-      descricao_ocorrencia: ocorrencia.descricao_ocorrencia,
-    }
+    return ocorrencia
   }
 }

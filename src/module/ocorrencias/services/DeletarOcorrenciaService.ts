@@ -10,11 +10,11 @@ export class DeletarOcorrenciaService {
     })
 
     if (!itensPedido) {
-      throw new AppError('ItensPedido não encontrada!', 404)
+      throw new AppError('Ocorrencia não encontrada!', 404)
     }
 
     await this.ocorrenciasRepositories.delete(codigo_ocorrencia)
 
-    return { message: 'ItensPedido removida com sucesso!' }
+    return { message: 'Item removida com sucesso!' }
   }
 }

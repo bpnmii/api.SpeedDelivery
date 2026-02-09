@@ -1,4 +1,5 @@
 import { OcorrenciasRepositories } from '../../../database/repositories/OcorrenciasRepositories'
+import AppError from '../../../errors/app-error' // Importando seu padrão de erro
 
 interface IRequest {
   codigo_ocorrencia: number
@@ -11,13 +12,16 @@ export class AtualizarOcorrenciaService {
   async execute(data: IRequest) {
     const { codigo_ocorrencia, ...updateData } = data
 
-    const ItensPedido = await this.OcorrenciasRepositories.findOneBy({
+    const ocorrencia = await this.OcorrenciasRepositories.findOneBy({
       codigo_ocorrencia,
     })
-    if (!ItensPedido) throw new Error('Entregas not found!')
 
-    await this.OcorrenciasRepositories.update(codigo_ocorrencia, updateData)
+    if (!ocorrencia) {
+      throw new AppError('Ocorrência não encontrada!', 404)
+    }
 
-    return { ...ItensPedido, ...updateData }
+    await this.OcorrenciasRepositories.update({ codigo_ocorrencia }, updateData)
+
+    return { ...ocorrencia, ...updateData }
   }
 }
