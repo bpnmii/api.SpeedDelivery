@@ -11,14 +11,15 @@ interface IRequest {
 export class MostrarItensPedidoService {
   constructor(private ItensPedidoRepositories: ItensPedidoRepositories) {}
 
-  async execute(data: IRequest) {
-    const { codigo_entrega, ...updateData } = data
-
-    const ItensPedidoExist = await this.ItensPedidoRepositories.findOneBy({
-      codigo_entrega,
+  async execute(codigo_entrega: number) {
+    const itens = await this.ItensPedidoRepositories.find({
+      where: { codigo_entrega },
     })
-    if (!ItensPedidoExist) throw new Error('Entrega não encontrada!')
 
-    return { ...ItensPedidoExist, ...updateData }
+    if (!itens || itens.length === 0) {
+      throw new Error('Nenhum item encontrado para esta entrega!')
+    }
+
+    return itens
   }
 }
