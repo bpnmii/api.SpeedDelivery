@@ -8,7 +8,7 @@ const router = Router()
 
 router.post('/', CriarOcorrenciaFactory)
 router.get('/', ListarOcorrenciaFactory)
-router.delete('/:id', DeletarOcorrenciaFactory)
-router.put('/:id', AtualizarOcorrenciaFactory)
+router.delete('/:codigo_ocorrencia', DeletarOcorrenciaFactory)
+router.patch('/:codigo_ocorrencia', AtualizarOcorrenciaFactory)
 
 export default router

@@ -9,6 +9,6 @@ const router = Router()
 router.post('/', CriarEntregaFactory)
 router.get('/', ListarEntregaFactory)
 router.delete('/:codigo_operacao', DeletarEntregaFactory)
-router.put('/:codigo_operacao', AtualizarEntregaFactory)
+router.patch('/:codigo_operacao', AtualizarEntregaFactory)
 
 export default router

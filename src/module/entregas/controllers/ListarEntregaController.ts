@@ -6,12 +6,12 @@ export class ListarEntregaController {
   constructor(private listarEntregaService: ListarEntregaService) {}
 
   async handle(req: Request, res: Response) {
-    const clientes = await this.listarEntregaService.execute()
+    const entregas = await this.listarEntregaService.execute()
 
-    if (!clientes) {
+    if (!entregas) {
       throw new AppError('Nenhuma entrega encontrado', 401)
     }
 
-    res.json(clientes)
+    res.json(entregas)
   }
 }
