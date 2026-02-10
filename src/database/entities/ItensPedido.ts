@@ -4,14 +4,18 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   JoinColumn,
+  ManyToOne,
 } from 'typeorm'
 import { Entregas } from './Entregas'
 
 @Entity('ItensPedido')
 export class ItensPedido {
-  @OneToMany(() => Entregas, (entrega) => entrega.codigo_operacao)
-  @JoinColumn({ name: 'codigo_entrega' })
+  @Column({ type: 'bigint' })
   codigo_entrega!: number
+
+  @ManyToOne(() => Entregas, (entrega) => entrega.codigo_operacao)
+  @JoinColumn({ name: 'codigo_entrega' })
+  entrega!: Entregas
 
   @PrimaryGeneratedColumn({
     type: 'bigint',
