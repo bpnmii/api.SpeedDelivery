@@ -5,6 +5,8 @@ export class ListarOcorrenciasEntregaService {
     private ocorrenciasEntregaRepositories: OcorrenciasEntregaRepositories,
   ) {}
   async execute() {
-    return this.ocorrenciasEntregaRepositories.find()
+    return this.ocorrenciasEntregaRepositories.find({
+      relations: ['entrega', 'ocorrencia'],
+    })
   }
 }
