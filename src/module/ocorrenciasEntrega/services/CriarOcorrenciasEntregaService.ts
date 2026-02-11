@@ -2,7 +2,7 @@ import { OcorrenciasEntregaRepositories } from '../../../database/repositories/O
 import AppError from '../../../errors/app-error'
 
 interface IRequest {
-  codigo_ocorrencia: number
+  codigo_ocorrencia?: number
   codigo_entrega: number
 }
 
@@ -11,8 +11,7 @@ export class CriarOcorrenciasEntregaService {
 
   async execute({ codigo_ocorrencia, codigo_entrega }: IRequest) {
     const vinculoExiste = await this.OcorrenciaRepository.findOneBy({
-      codigo_ocorrencia,
-      codigo_entrega,
+      entrega: { codigo_operacao: codigo_entrega },
     })
 
     if (vinculoExiste) {
@@ -23,8 +22,8 @@ export class CriarOcorrenciasEntregaService {
     }
 
     const ocorrenciaE = this.OcorrenciaRepository.create({
-      codigo_ocorrencia,
-      codigo_entrega,
+      entrega: { codigo_operacao: codigo_entrega },
+      ocorrencia: { codigo_ocorrencia: codigo_ocorrencia },
     })
 
     await this.OcorrenciaRepository.save(ocorrenciaE)

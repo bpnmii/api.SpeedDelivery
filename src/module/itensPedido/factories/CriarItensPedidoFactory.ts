@@ -14,7 +14,7 @@ export const CriarItensPedidoFactory = async (req: Request, res: Response) => {
 
     await Controller.handle(req, res)
   } catch (error) {
-    console.log('criarUsuarioFactory', error)
+    console.log('CriarItensPedidoFactory', error)
 
     if (error instanceof AppError) {
       return res.status(error.statusCode).json({ message: error.message })

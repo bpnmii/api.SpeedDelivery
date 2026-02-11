@@ -7,7 +7,6 @@ export class CriarOcorrenciaController {
 
   async handle(req: Request, res: Response) {
     const bodySchema = z.object({
-      codigo_ocorrencia: z.number(),
       descricao_ocorrencia: z.string(),
     })
 

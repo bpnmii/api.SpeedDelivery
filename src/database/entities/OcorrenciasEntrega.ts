@@ -1,26 +1,30 @@
 import {
   Entity,
   PrimaryGeneratedColumn,
-  Column,
-  Index,
-  OneToMany,
+  ManyToOne,
   JoinColumn,
+  CreateDateColumn,
+  Column,
 } from 'typeorm'
 import { Entregas } from './Entregas'
 import { Ocorrencias } from './Ocorrencias'
 
 @Entity('OcorrenciasEntrega')
 export class OcorrenciasEntrega {
-  @PrimaryGeneratedColumn({
-    type: 'bigint',
-  })
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   index!: number
 
-  @OneToMany(() => Entregas, (entrega) => entrega.codigo_operacao)
+  @ManyToOne(() => Entregas)
   @JoinColumn({ name: 'codigo_entrega' })
-  codigo_entrega!: number
+  entrega!: Entregas
 
-  @OneToMany(() => Ocorrencias, (ocorrencias) => ocorrencias.codigo_ocorrencia)
+  @ManyToOne(() => Ocorrencias)
   @JoinColumn({ name: 'codigo_ocorrencia' })
-  codigo_ocorrencia!: number
+  ocorrencia!: Ocorrencias
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    name: 'created_at',
+  })
+  created_at!: Date
 }
