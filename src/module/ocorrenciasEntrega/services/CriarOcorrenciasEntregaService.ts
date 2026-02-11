@@ -12,6 +12,7 @@ export class CriarOcorrenciasEntregaService {
   async execute({ codigo_ocorrencia, codigo_entrega }: IRequest) {
     const vinculoExiste = await this.OcorrenciaRepository.findOneBy({
       entrega: { codigo_operacao: codigo_entrega },
+      ocorrencia: { codigo_ocorrencia },
     })
 
     if (vinculoExiste) {
@@ -23,7 +24,7 @@ export class CriarOcorrenciasEntregaService {
 
     const ocorrenciaE = this.OcorrenciaRepository.create({
       entrega: { codigo_operacao: codigo_entrega },
-      ocorrencia: { codigo_ocorrencia: codigo_ocorrencia },
+      ocorrencia: { codigo_ocorrencia },
     })
 
     await this.OcorrenciaRepository.save(ocorrenciaE)
