@@ -25,15 +25,14 @@ async function main() {
 
     await runSeed(AppDataSource)
 
-    await AppDataSource.destroy()
     console.log('Banco atual:')
     const result = await AppDataSource.query('SELECT DATABASE()')
     console.log(result)
+
+    await AppDataSource.destroy()
     process.exit(0)
   } catch (error) {
     console.error('❌ Erro ao executar seed:', error)
     process.exit(1)
   }
 }
-
-main()
