@@ -23,6 +23,7 @@ export class AtualizarEntregaController {
       bairro: z.string().optional(),
       cidade: z.string().optional(),
       estado: z.string().optional(),
+      observacao: z.string().optional(),
       status_entrega: z.nativeEnum(StatusEntregaEnum).optional(),
       status_resultado: z.nativeEnum(StatusResultadoEnum).optional(),
     })

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "typeorm": "typeorm-ts-node-commonjs",
-    "seed": "ts-node src/database/seed/run-seed.ts",
+    "seed": "ts-node src/database/seed/seed.ts",
     "dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
     "build": "tsup src --out-dir build",

@@ -14,6 +14,7 @@ interface IRequest {
   bairro?: string
   cidade?: string
   estado?: string
+  observacao?: string
   status_entrega?: StatusEntregaEnum
   status_resultado?: StatusResultadoEnum
 }
