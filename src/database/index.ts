@@ -14,7 +14,7 @@ export const AppDataSource = new DataSource({
   password: '', // Deixe vazio conforme configurado no Docker
   database: 'SpeedDelivery', // Nome novo
   synchronize: true,
-  logging: true,
+  logging: false,
   entities: [entities],
   migrations: [migrations],
   subscribers: [],

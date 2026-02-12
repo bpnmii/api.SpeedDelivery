@@ -46,8 +46,11 @@ export class Entregas {
   @Column({ type: 'varchar', length: 9 })
   CEP!: string
 
-  @Column({ type: 'varchar', length: 80 })
-  Observacao!: string
+  @Column({ type: 'varchar', length: 80, nullable: true })
+  observacao?: string
+
+  @Column({ type: 'text', nullable: true })
+  imagem?: string[]
 
   @Column({
     type: 'enum',
