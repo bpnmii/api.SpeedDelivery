@@ -6,8 +6,8 @@ import { EntregasRepositories } from '../../../database/repositories/EntregasRep
 import AppError from '../../../errors/app-error'
 
 interface IRequest {
-  sequencia_entrega: number
   codigo_operacao?: number
+  codigo_entregador: number
   codigo_cliente: number
   nome_cliente: string
   CEP: string

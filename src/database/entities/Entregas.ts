@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm'
+import { Entregadores } from './Entregadores'
 
 export enum StatusEntregaEnum {
   NAO_INICIADO = 'NAO_INICIADO',
@@ -20,13 +27,14 @@ export class Entregas {
   })
   codigo_operacao!: number
 
-  @Column({ type: 'int' })
-  sequencia_entrega!: number
-
   @Column({
     type: 'bigint',
   })
   codigo_cliente!: number
+
+  @ManyToOne(() => Entregadores)
+  @JoinColumn({ name: 'codigo_entregador' })
+  entregador!: Entregadores
 
   @Column({ type: 'varchar', length: 40 })
   nome_cliente!: string

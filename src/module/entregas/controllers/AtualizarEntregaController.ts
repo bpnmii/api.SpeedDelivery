@@ -18,8 +18,8 @@ export class AtualizarEntregaController {
     const imagens = arquivos?.map((file) => file.filename)
 
     const bodySchema = z.object({
-      sequencia_entrega: z.number().optional(),
       codigo_cliente: z.number().optional(),
+      codigo_entregador: z.number().optional(),
       nome_cliente: z.string().optional(),
       CEP: z.string().optional(),
       endereco: z.string().optional(),

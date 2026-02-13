@@ -5,9 +5,9 @@ import {
 import { EntregasRepositories } from '../../../database/repositories/EntregasRepositories'
 
 interface IRequest {
-  sequencia_entrega?: number
   codigo_operacao: number
   codigo_cliente?: number
+  codigo_entregador?: number
   nome_cliente?: string
   CEP?: string
   endereco?: string

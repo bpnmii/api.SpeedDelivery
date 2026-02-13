@@ -4,7 +4,6 @@ import {
   ManyToOne,
   JoinColumn,
   CreateDateColumn,
-  Column,
 } from 'typeorm'
 import { Entregas } from './Entregas'
 import { Ocorrencias } from './Ocorrencias'
