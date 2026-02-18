@@ -32,6 +32,7 @@ export class Entregas {
   })
   codigo_cliente!: number
 
+  // Relacionamento com a tabela Entregadores
   @ManyToOne(() => Entregadores)
   @JoinColumn({ name: 'codigo_entregador' })
   entregador!: Entregadores

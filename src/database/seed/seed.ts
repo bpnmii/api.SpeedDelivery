@@ -6,6 +6,7 @@ import { Entregas } from '../entities/Entregas'
 import { ItensPedido } from '../entities/ItensPedido'
 import { Ocorrencias } from '../entities/Ocorrencias'
 import { OcorrenciasEntrega } from '../entities/OcorrenciasEntrega'
+import { Entregadores } from '../entities/Entregadores'
 
 const AppDataSource = new DataSource({
   type: 'mysql',
@@ -14,7 +15,13 @@ const AppDataSource = new DataSource({
   username: 'root',
   password: '',
   database: 'SpeedDelivery',
-  entities: [Entregas, ItensPedido, Ocorrencias, OcorrenciasEntrega],
+  entities: [
+    Entregas,
+    ItensPedido,
+    Ocorrencias,
+    OcorrenciasEntrega,
+    Entregadores,
+  ],
   synchronize: true,
 })
 
@@ -36,3 +43,5 @@ async function main() {
     process.exit(1)
   }
 }
+
+main()

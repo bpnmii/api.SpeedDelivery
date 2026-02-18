@@ -12,6 +12,7 @@ export class ItensPedido {
   @Column({ type: 'bigint' })
   codigo_entrega!: number
 
+  // Relacionamento com a tabela Entregas
   @ManyToOne(() => Entregas, (entrega) => entrega.codigo_operacao)
   @JoinColumn({ name: 'codigo_entrega' })
   entrega!: Entregas

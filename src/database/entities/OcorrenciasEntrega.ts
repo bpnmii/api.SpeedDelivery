@@ -13,10 +13,12 @@ export class OcorrenciasEntrega {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   index!: number
 
+  // Relacionamento com a tabela Entregas
   @ManyToOne(() => Entregas)
   @JoinColumn({ name: 'codigo_entrega' })
   entrega!: Entregas
 
+  // Relacionamento com a tabela Ocorrencias
   @ManyToOne(() => Ocorrencias)
   @JoinColumn({ name: 'codigo_ocorrencia' })
   ocorrencia!: Ocorrencias
