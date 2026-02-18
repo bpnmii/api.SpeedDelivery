@@ -62,6 +62,7 @@ export const runSeed = async (dataSource: DataSource) => {
   const ocorrencias = await ocorrenciaRepo.save([
     { descricao_ocorrencia: 'Iniciado' },
     { descricao_ocorrencia: 'Pausado' },
+    { descricao_ocorrencia: 'Retomado' },
     { descricao_ocorrencia: 'Concluido' },
     { descricao_ocorrencia: 'Cliente Ausente' },
     { descricao_ocorrencia: 'Endereço não localizado' },
@@ -137,7 +138,7 @@ export const runSeed = async (dataSource: DataSource) => {
     const entrega = await entregaRepo.save({
       ...dadosEntregas[i],
       entregador: entregadores[i],
-      status_entrega: StatusEntregaEnum.INICIADO,
+      status_entrega: StatusEntregaEnum.NAO_INICIADO,
       status_resultado: StatusResultadoEnum.NAO_ENTREGUE,
     })
     entregas.push(entrega)
@@ -166,12 +167,6 @@ export const runSeed = async (dataSource: DataSource) => {
   // ============================
   // 5️⃣ OCORRENCIASENTREGA (5)
   // ============================
-  for (let i = 0; i < 5; i++) {
-    await ocorrenciaEntregaRepo.save({
-      entrega: entregas[i],
-      ocorrencia: ocorrencias[i],
-    })
-  }
 
   console.log('✅ Seed executado com sucesso!')
   console.log('- 5 Entregadores')
