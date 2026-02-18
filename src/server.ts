@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import ip from 'ip'
 import app from './app'
+import './utils/cleanupUploads'
 
 // import './container'
 
