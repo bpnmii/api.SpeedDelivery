@@ -58,7 +58,7 @@ export class Entregas {
   @Column({ type: 'varchar', length: 80, nullable: true })
   observacao?: string
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'json', nullable: true })
   imagem?: string[]
 
   @Column({
