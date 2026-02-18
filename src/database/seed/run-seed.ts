@@ -60,14 +60,14 @@ export const runSeed = async (dataSource: DataSource) => {
   // 2️⃣ OCORRENCIAS (5)
   // ============================
   const ocorrencias = await ocorrenciaRepo.save([
+    { descricao_ocorrencia: 'Iniciado' },
+    { descricao_ocorrencia: 'Pausado' },
+    { descricao_ocorrencia: 'Concluido' },
     { descricao_ocorrencia: 'Cliente Ausente' },
     { descricao_ocorrencia: 'Endereço não localizado' },
     { descricao_ocorrencia: 'Veículo Quebrado' },
     { descricao_ocorrencia: 'Mercadoria Avariada' },
     { descricao_ocorrencia: 'Recusa de Recebimento' },
-    { descricao_ocorrencia: 'Iniciado' },
-    { descricao_ocorrencia: 'Pausado' },
-    { descricao_ocorrencia: 'Concluido' },
   ])
 
   // ============================
