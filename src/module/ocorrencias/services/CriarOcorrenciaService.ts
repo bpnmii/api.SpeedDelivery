@@ -1,8 +1,11 @@
+import { TipoOcorrenciaEnum } from '@/database/entities/Ocorrencias'
 import { OcorrenciasRepositories } from '../../../database/repositories/OcorrenciasRepositories'
 import AppError from '../../../errors/app-error'
 
 interface IRequest {
-  descricao_ocorrencia: string
+  nome_ocorrencia: string
+  tipo_ocorrencia?: TipoOcorrenciaEnum
+  descricao_ocorrencia?: string
 }
 
 export class CriarOcorrenciaService {

@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm'
-import { Ocorrencias } from '../entities/Ocorrencias'
+import { Ocorrencias, TipoOcorrenciaEnum } from '../entities/Ocorrencias'
 import {
   Entregas,
   StatusEntregaEnum,
@@ -57,18 +57,69 @@ export const runSeed = async (dataSource: DataSource) => {
   ])
 
   // ============================
-  // 2️⃣ OCORRENCIAS (5)
+  // 2️⃣ OCORRENCIAS
   // ============================
   const ocorrencias = await ocorrenciaRepo.save([
-    { descricao_ocorrencia: 'Iniciado' },
-    { descricao_ocorrencia: 'Pausado' },
-    { descricao_ocorrencia: 'Retomado' },
-    { descricao_ocorrencia: 'Concluido' },
-    { descricao_ocorrencia: 'Cliente Ausente' },
-    { descricao_ocorrencia: 'Endereço não localizado' },
-    { descricao_ocorrencia: 'Veículo Quebrado' },
-    { descricao_ocorrencia: 'Mercadoria Avariada' },
-    { descricao_ocorrencia: 'Recusa de Recebimento' },
+    {
+      nome_ocorrencia: 'INICIADO',
+      tipo_ocorrencia: TipoOcorrenciaEnum.STATUS_ENTREGA,
+    },
+    {
+      nome_ocorrencia: 'PAUSADO',
+      tipo_ocorrencia: TipoOcorrenciaEnum.STATUS_ENTREGA,
+    },
+    {
+      nome_ocorrencia: 'RETOMADO',
+      tipo_ocorrencia: TipoOcorrenciaEnum.STATUS_ENTREGA,
+    },
+    {
+      nome_ocorrencia: 'CONCLUIDO',
+      tipo_ocorrencia: TipoOcorrenciaEnum.STATUS_ENTREGA,
+    },
+    {
+      nome_ocorrencia: 'Cliente Ausente',
+      tipo_ocorrencia: TipoOcorrenciaEnum.MOTIVO_OCORRENCIA,
+    },
+    {
+      nome_ocorrencia: 'Endereço Não Localizado',
+      tipo_ocorrencia: TipoOcorrenciaEnum.MOTIVO_OCORRENCIA,
+    },
+    {
+      nome_ocorrencia: 'Mercadoria Avariada',
+      tipo_ocorrencia: TipoOcorrenciaEnum.MOTIVO_OCORRENCIA,
+    },
+    {
+      nome_ocorrencia: 'Recusa de Recebimento',
+      tipo_ocorrencia: TipoOcorrenciaEnum.MOTIVO_OCORRENCIA,
+    },
+    {
+      nome_ocorrencia: 'Horário de Almoço',
+      tipo_ocorrencia: TipoOcorrenciaEnum.MOTIVO_PAUSA,
+    },
+    {
+      nome_ocorrencia: 'Fiscalização de Trânsito',
+      tipo_ocorrencia: TipoOcorrenciaEnum.MOTIVO_PAUSA,
+    },
+    {
+      nome_ocorrencia: 'Trânsito Intenso',
+      tipo_ocorrencia: TipoOcorrenciaEnum.MOTIVO_PAUSA,
+    },
+    {
+      nome_ocorrencia: 'Problemas Mecânicos',
+      tipo_ocorrencia: TipoOcorrenciaEnum.MOTIVO_PAUSA,
+    },
+    {
+      nome_ocorrencia: 'Obstáculo na Via',
+      tipo_ocorrencia: TipoOcorrenciaEnum.MOTIVO_PAUSA,
+    },
+    {
+      nome_ocorrencia: 'Mal Estar',
+      tipo_ocorrencia: TipoOcorrenciaEnum.MOTIVO_PAUSA,
+    },
+    {
+      nome_ocorrencia: 'Nenhuma das opções anteriores',
+      tipo_ocorrencia: TipoOcorrenciaEnum.MOTIVO_PAUSA,
+    },
   ])
 
   // ============================
