@@ -61,19 +61,19 @@ export const runSeed = async (dataSource: DataSource) => {
   // ============================
   const ocorrencias = await ocorrenciaRepo.save([
     {
-      nome_ocorrencia: 'INICIADO',
+      nome_ocorrencia: 'Iniciado',
       tipo_ocorrencia: TipoOcorrenciaEnum.STATUS_ENTREGA,
     },
     {
-      nome_ocorrencia: 'PAUSADO',
+      nome_ocorrencia: 'Pausado',
       tipo_ocorrencia: TipoOcorrenciaEnum.STATUS_ENTREGA,
     },
     {
-      nome_ocorrencia: 'RETOMADO',
+      nome_ocorrencia: 'Retomado',
       tipo_ocorrencia: TipoOcorrenciaEnum.STATUS_ENTREGA,
     },
     {
-      nome_ocorrencia: 'CONCLUIDO',
+      nome_ocorrencia: 'Concluído',
       tipo_ocorrencia: TipoOcorrenciaEnum.STATUS_ENTREGA,
     },
     {
