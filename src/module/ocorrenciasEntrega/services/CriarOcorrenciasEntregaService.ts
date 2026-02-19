@@ -15,13 +15,6 @@ export class CriarOcorrenciasEntregaService {
       ocorrencia: { codigo_ocorrencia },
     })
 
-    if (vinculoExiste) {
-      throw new AppError(
-        'Esta ocorrência já foi registrada para esta entrega!',
-        400,
-      )
-    }
-
     const ocorrenciaE = this.OcorrenciaRepository.create({
       entrega: { codigo_operacao: codigo_entrega },
       ocorrencia: { codigo_ocorrencia },
