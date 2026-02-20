@@ -38,7 +38,7 @@ export class LoginService {
 
     return {
       entregador: {
-        id: entregador.codigo_entregador,
+        codigo_entregador: entregador.codigo_entregador,
         nome: entregador.unidade_negocio,
         email: entregador.email,
       },

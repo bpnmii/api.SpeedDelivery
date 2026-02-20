@@ -6,8 +6,8 @@ import { EntregasRepositories } from '../../../database/repositories/EntregasRep
 
 interface IRequest {
   sequencia_entrega?: number
-  codigo_operacao: number
-  codigo_entregador?: number
+  codigo_entregador: number
+  codigo_operacao?: number
   codigo_cliente?: number
   nome_cliente?: string
   CEP?: string
@@ -19,17 +19,25 @@ interface IRequest {
   status_resultado?: StatusResultadoEnum
 }
 
-export class MostrarEntregaService {
+export class MostrarEntregaEntregadorService {
   constructor(private EntregasRepositories: EntregasRepositories) {}
 
   async execute(data: IRequest) {
-    const { codigo_operacao, ...updateData } = data
+    const { codigo_entregador } = data
 
-    const EntregasExists = await this.EntregasRepositories.findOneBy({
-      codigo_operacao,
+    const entregas = await this.EntregasRepositories.find({
+      where: {
+        entregador: {
+          codigo_entregador,
+        },
+      },
+      relations: ['entregador'],
     })
-    if (!EntregasExists) throw new Error('Entrega não encontrada!')
 
-    return { ...EntregasExists, ...updateData }
+    if (entregas.length === 0) {
+      throw new Error('Entrega não encontrada!')
+    }
+
+    return entregas
   }
 }

@@ -17,7 +17,6 @@ export const runSeed = async (dataSource: DataSource) => {
   const ocorrenciaRepo = dataSource.getRepository(Ocorrencias)
   const ocorrenciaEntregaRepo = dataSource.getRepository(OcorrenciasEntrega)
 
-  // Limpeza correta respeitando ordem das FK
   await dataSource.query('SET FOREIGN_KEY_CHECKS = 0')
   await ocorrenciaEntregaRepo.clear()
   await itemRepo.clear()
@@ -27,10 +26,11 @@ export const runSeed = async (dataSource: DataSource) => {
   await dataSource.query('SET FOREIGN_KEY_CHECKS = 1')
 
   const hashSenha = await bcrypt.hash('123456', 10)
+
   // ============================
-  // 1️⃣ ENTREGADORES (5)
+  // ENTREGADORES
   // ============================
-  const entregadores = await entregadorRepo.save([
+  const [carlos, ana, marcos, julia, roberto] = await entregadorRepo.save([
     {
       unidade_negocio: 'Santo André',
       email: 'carlos.silva@gmail.com',
@@ -42,12 +42,12 @@ export const runSeed = async (dataSource: DataSource) => {
       senha: hashSenha,
     },
     {
-      unidade_negocio: 'São Bernardo',
+      unidade_negocio: 'São Bernardo do Campo',
       email: 'marcos.lima@gmail.com',
       senha: hashSenha,
     },
     {
-      unidade_negocio: 'São Caetano',
+      unidade_negocio: 'São Caetano do Sul',
       email: 'julia.mendes@gmail.com',
       senha: hashSenha,
     },
@@ -59,9 +59,9 @@ export const runSeed = async (dataSource: DataSource) => {
   ])
 
   // ============================
-  // 2️⃣ OCORRENCIAS
+  // OCORRENCIAS (INALTERADAS)
   // ============================
-  const ocorrencias = await ocorrenciaRepo.save([
+  await ocorrenciaRepo.save([
     {
       nome_ocorrencia: 'Iniciado',
       tipo_ocorrencia: TipoOcorrenciaEnum.STATUS_ENTREGA,
@@ -125,106 +125,300 @@ export const runSeed = async (dataSource: DataSource) => {
   ])
 
   // ============================
-  // 3️⃣ ENTREGAS (5) — endereços reais do ABC Paulista
+  // ENTREGAS MANUAIS (25)
   // ============================
-  const dadosEntregas = [
+
+  const entregas = await entregaRepo.save([
+    // ===== CARLOS (Santo André) =====
     {
-      sequencia_entrega: 1,
-      codigo_cliente: 2001,
+      codigo_cliente: 1001,
       nome_cliente: 'João Almeida',
       endereco: 'Av. Industrial, 600',
       bairro: 'Campestre',
       cidade: 'Santo André',
       estado: 'SP',
       CEP: '09080-500',
-      observacao: 'Entregar na portaria',
+      entregador: carlos,
     },
     {
-      sequencia_entrega: 2,
-      codigo_cliente: 2002,
-      nome_cliente: 'Mariana Souza',
+      codigo_cliente: 1002,
+      nome_cliente: 'Maria Lopes',
       endereco: 'Rua Senador Flaquer, 70',
       bairro: 'Centro',
       cidade: 'Santo André',
       estado: 'SP',
       CEP: '09020-020',
-      observacao: 'Ligar antes de entregar',
+      entregador: carlos,
     },
     {
-      sequencia_entrega: 3,
-      codigo_cliente: 2003,
-      nome_cliente: 'Carlos Henrique Lima',
-      endereco: 'Av. Kennedy, 700',
-      bairro: 'Vila Assunção',
+      codigo_cliente: 1003,
+      nome_cliente: 'Pedro Martins',
+      endereco: 'Av. Portugal, 397',
+      bairro: 'Centro',
       cidade: 'Santo André',
       estado: 'SP',
-      CEP: '09090-000',
-      observacao: 'Entregar das 9h às 18h',
+      CEP: '09040-010',
+      entregador: carlos,
     },
     {
-      sequencia_entrega: 4,
-      codigo_cliente: 2004,
-      nome_cliente: 'Fernanda Oliveira',
+      codigo_cliente: 1004,
+      nome_cliente: 'Luciana Souza',
+      endereco: 'Rua das Figueiras, 1200',
+      bairro: 'Jardim',
+      cidade: 'Santo André',
+      estado: 'SP',
+      CEP: '09080-300',
+      entregador: carlos,
+    },
+    {
+      codigo_cliente: 1005,
+      nome_cliente: 'Rafael Lima',
+      endereco: 'Av. Dom Pedro II, 1500',
+      bairro: 'Campestre',
+      cidade: 'Santo André',
+      estado: 'SP',
+      CEP: '09080-111',
+      entregador: carlos,
+    },
+
+    // ===== ANA =====
+    {
+      codigo_cliente: 1006,
+      nome_cliente: 'Camila Rocha',
+      endereco: 'Rua Catequese, 255',
+      bairro: 'Vila Guiomar',
+      cidade: 'Santo André',
+      estado: 'SP',
+      CEP: '09090-400',
+      entregador: ana,
+    },
+    {
+      codigo_cliente: 1007,
+      nome_cliente: 'Bruno Alves',
+      endereco: 'Rua Oratório, 3000',
+      bairro: 'Parque Oratório',
+      cidade: 'Santo André',
+      estado: 'SP',
+      CEP: '09260-000',
+      entregador: ana,
+    },
+    {
+      codigo_cliente: 1008,
+      nome_cliente: 'Daniela Costa',
+      endereco: 'Av. Itamarati, 2100',
+      bairro: 'Parque Erasmo',
+      cidade: 'Santo André',
+      estado: 'SP',
+      CEP: '09260-470',
+      entregador: ana,
+    },
+    {
+      codigo_cliente: 1009,
+      nome_cliente: 'Fernando Dias',
+      endereco: 'Rua Carijós, 500',
+      bairro: 'Centro',
+      cidade: 'Santo André',
+      estado: 'SP',
+      CEP: '09060-001',
+      entregador: ana,
+    },
+    {
+      codigo_cliente: 1010,
+      nome_cliente: 'Juliana Prado',
+      endereco: 'Rua Coronel Oliveira Lima, 400',
+      bairro: 'Centro',
+      cidade: 'Santo André',
+      estado: 'SP',
+      CEP: '09010-000',
+      entregador: ana,
+    },
+
+    // ===== MARCOS =====
+    {
+      codigo_cliente: 1011,
+      nome_cliente: 'Patrícia Gomes',
       endereco: 'Rua Marechal Deodoro, 234',
       bairro: 'Centro',
       cidade: 'São Bernardo do Campo',
       estado: 'SP',
       CEP: '09710-110',
-      observacao: 'Solicitar assinatura',
+      entregador: marcos,
     },
     {
-      sequencia_entrega: 5,
-      codigo_cliente: 2005,
-      nome_cliente: 'Rafael Martins',
+      codigo_cliente: 1012,
+      nome_cliente: 'Ricardo Melo',
+      endereco: 'Av. Kennedy, 1111',
+      bairro: 'Anchieta',
+      cidade: 'São Bernardo do Campo',
+      estado: 'SP',
+      CEP: '09726-253',
+      entregador: marcos,
+    },
+    {
+      codigo_cliente: 1013,
+      nome_cliente: 'Carla Mendes',
+      endereco: 'Av. Faria Lima, 900',
+      bairro: 'Centro',
+      cidade: 'São Bernardo do Campo',
+      estado: 'SP',
+      CEP: '09720-000',
+      entregador: marcos,
+    },
+    {
+      codigo_cliente: 1014,
+      nome_cliente: 'Thiago Santos',
+      endereco: 'Rua Jurubatuba, 1500',
+      bairro: 'Centro',
+      cidade: 'São Bernardo do Campo',
+      estado: 'SP',
+      CEP: '09725-200',
+      entregador: marcos,
+    },
+    {
+      codigo_cliente: 1015,
+      nome_cliente: 'Amanda Ribeiro',
+      endereco: 'Av. Brigadeiro Faria Lima, 500',
+      bairro: 'Assunção',
+      cidade: 'São Bernardo do Campo',
+      estado: 'SP',
+      CEP: '09810-000',
+      entregador: marcos,
+    },
+
+    // ===== JULIA =====
+    {
+      codigo_cliente: 1016,
+      nome_cliente: 'Lucas Andrade',
       endereco: 'Av. Goiás, 820',
       bairro: 'Centro',
       cidade: 'São Caetano do Sul',
       estado: 'SP',
       CEP: '09521-001',
-      observacao: 'Fragil, manusear com cuidado',
+      entregador: julia,
     },
-  ]
+    {
+      codigo_cliente: 1017,
+      nome_cliente: 'Beatriz Lima',
+      endereco: 'Rua Santa Catarina, 300',
+      bairro: 'Fundação',
+      cidade: 'São Caetano do Sul',
+      estado: 'SP',
+      CEP: '09510-120',
+      entregador: julia,
+    },
+    {
+      codigo_cliente: 1018,
+      nome_cliente: 'Eduardo Nunes',
+      endereco: 'Rua Amazonas, 600',
+      bairro: 'Centro',
+      cidade: 'São Caetano do Sul',
+      estado: 'SP',
+      CEP: '09520-070',
+      entregador: julia,
+    },
+    {
+      codigo_cliente: 1019,
+      nome_cliente: 'Vanessa Moura',
+      endereco: 'Alameda São Caetano, 1500',
+      bairro: 'Santa Maria',
+      cidade: 'São Caetano do Sul',
+      estado: 'SP',
+      CEP: '09560-500',
+      entregador: julia,
+    },
+    {
+      codigo_cliente: 1020,
+      nome_cliente: 'Gustavo Rocha',
+      endereco: 'Rua Visconde de Inhaúma, 900',
+      bairro: 'Oswaldo Cruz',
+      cidade: 'São Caetano do Sul',
+      estado: 'SP',
+      CEP: '09571-380',
+      entregador: julia,
+    },
 
-  const entregas: Entregas[] = []
+    // ===== ROBERTO =====
+    {
+      codigo_cliente: 1021,
+      nome_cliente: 'Sabrina Alves',
+      endereco: 'Av. Alda, 300',
+      bairro: 'Centro',
+      cidade: 'Diadema',
+      estado: 'SP',
+      CEP: '09910-170',
+      entregador: roberto,
+    },
+    {
+      codigo_cliente: 1022,
+      nome_cliente: 'Leonardo Costa',
+      endereco: 'Rua Manoel da Nóbrega, 450',
+      bairro: 'Centro',
+      cidade: 'Diadema',
+      estado: 'SP',
+      CEP: '09910-720',
+      entregador: roberto,
+    },
+    {
+      codigo_cliente: 1023,
+      nome_cliente: 'Paula Fernandes',
+      endereco: 'Av. Fábio Eduardo Ramos Esquivel, 1000',
+      bairro: 'Centro',
+      cidade: 'Diadema',
+      estado: 'SP',
+      CEP: '09920-000',
+      entregador: roberto,
+    },
+    {
+      codigo_cliente: 1024,
+      nome_cliente: 'Marcelo Vieira',
+      endereco: 'Rua Serra do Mar, 800',
+      bairro: 'Vila Conceição',
+      cidade: 'Diadema',
+      estado: 'SP',
+      CEP: '09981-000',
+      entregador: roberto,
+    },
+    {
+      codigo_cliente: 1025,
+      nome_cliente: 'Aline Martins',
+      endereco: 'Av. Piraporinha, 2000',
+      bairro: 'Piraporinha',
+      cidade: 'Diadema',
+      estado: 'SP',
+      CEP: '09950-000',
+      entregador: roberto,
+    },
+  ])
 
-  for (let i = 0; i < dadosEntregas.length; i++) {
-    const entrega = await entregaRepo.save({
-      ...dadosEntregas[i],
-      entregador: entregadores[i],
-      status_entrega: StatusEntregaEnum.NAO_INICIADO,
-      status_resultado: StatusResultadoEnum.NAO_ENTREGUE,
-    })
-    entregas.push(entrega)
+  // ============================
+  // 3 ITENS POR ENTREGA
+  // ============================
+  for (const entrega of entregas) {
+    await itemRepo.save([
+      {
+        codigo_entrega: entrega.codigo_operacao,
+        descricao_produto: 'Notebook Dell Inspiron',
+        embalagem: 'CX',
+        quantidade: 2,
+      },
+      {
+        codigo_entrega: entrega.codigo_operacao,
+        descricao_produto: 'Monitor LG 24"',
+        embalagem: 'CX',
+        quantidade: 3,
+      },
+      {
+        codigo_entrega: entrega.codigo_operacao,
+        descricao_produto: 'Mouse Gamer',
+        embalagem: 'SC',
+        quantidade: 5,
+      },
+    ])
   }
-
-  // ============================
-  // 4️⃣ ITENSPEDIDO (5)
-  // ============================
-  const produtos = [
-    { descricao: 'Notebook Dell Inspiron', embalagem: 'CX', quantidade: 10 },
-    { descricao: 'Monitor LG 24"', embalagem: 'CX', quantidade: 20 },
-    { descricao: 'Teclado Mecânico', embalagem: 'CX', quantidade: 30 },
-    { descricao: 'Mouse Gamer', embalagem: 'SC', quantidade: 40 },
-    { descricao: 'Headset USB', embalagem: 'SC', quantidade: 50 },
-  ]
-
-  for (let i = 0; i < 5; i++) {
-    await itemRepo.save({
-      codigo_entrega: entregas[i].codigo_operacao,
-      descricao_produto: produtos[i].descricao,
-      embalagem: produtos[i].embalagem,
-      quantidade: produtos[i].quantidade,
-    })
-  }
-
-  // ============================
-  // 5️⃣ OCORRENCIASENTREGA (5)
-  // ============================
 
   console.log('✅ Seed executado com sucesso!')
   console.log('- 5 Entregadores')
   console.log('- 15 Ocorrencias')
-  console.log('- 5 Entregas')
-  console.log('- 5 ItensPedido')
-  console.log('- 5 OcorrenciasEntrega')
+  console.log('- 25 Entregas')
+  console.log('- 75 ItensPedido')
 }
