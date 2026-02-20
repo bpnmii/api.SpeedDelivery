@@ -21,7 +21,7 @@ export class Entregadores {
 
   @Column({
     type: 'varchar',
-    length: 40,
+    length: 255,
   })
   senha!: string
 }

@@ -8,6 +8,7 @@ import {
 import { ItensPedido } from '../entities/ItensPedido'
 import { OcorrenciasEntrega } from '../entities/OcorrenciasEntrega'
 import { Entregadores } from '../entities/Entregadores'
+import bcrypt from 'bcryptjs'
 
 export const runSeed = async (dataSource: DataSource) => {
   const entregadorRepo = dataSource.getRepository(Entregadores)
@@ -25,34 +26,35 @@ export const runSeed = async (dataSource: DataSource) => {
   await entregadorRepo.clear()
   await dataSource.query('SET FOREIGN_KEY_CHECKS = 1')
 
+  const hashSenha = await bcrypt.hash('123456', 10)
   // ============================
   // 1️⃣ ENTREGADORES (5)
   // ============================
   const entregadores = await entregadorRepo.save([
     {
       unidade_negocio: 'Santo André',
-      email: 'carlos.silva@speeddelivery.com',
-      senha: 'senha123',
+      email: 'carlos.silva@gmail.com',
+      senha: hashSenha,
     },
     {
       unidade_negocio: 'Santo André',
-      email: 'ana.souza@speeddelivery.com',
-      senha: 'senha123',
+      email: 'ana.souza@gmail.com',
+      senha: hashSenha,
     },
     {
       unidade_negocio: 'São Bernardo',
-      email: 'marcos.lima@speeddelivery.com',
-      senha: 'senha123',
+      email: 'marcos.lima@gmail.com',
+      senha: hashSenha,
     },
     {
       unidade_negocio: 'São Caetano',
-      email: 'julia.mendes@speeddelivery.com',
-      senha: 'senha123',
+      email: 'julia.mendes@gmail.com',
+      senha: hashSenha,
     },
     {
       unidade_negocio: 'Diadema',
-      email: 'roberto.costa@speeddelivery.com',
-      senha: 'senha123',
+      email: 'roberto.costa@gmail.com',
+      senha: hashSenha,
     },
   ])
 
@@ -221,7 +223,7 @@ export const runSeed = async (dataSource: DataSource) => {
 
   console.log('✅ Seed executado com sucesso!')
   console.log('- 5 Entregadores')
-  console.log('- 5 Ocorrencias')
+  console.log('- 15 Ocorrencias')
   console.log('- 5 Entregas')
   console.log('- 5 ItensPedido')
   console.log('- 5 OcorrenciasEntrega')
